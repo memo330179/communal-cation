@@ -9,7 +9,7 @@ from app import login_manager
 @auth.route('/login', methods=['GET'])
 def login_get():
   form = LoginForm(request.form)
-  return render_template('login.html', 
+  return render_template('auth/login.html', 
                           form=form)
   
 @auth.route('/login', methods=['POST'])

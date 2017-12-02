@@ -7,12 +7,13 @@ socketio = SocketIO()
 login_manager = LoginManager()
 
 
-def create_app(debug=False):
+def create_app(debug=True):
     """Create an application."""
     app = Flask(__name__)
-    app.debug = debug
+    app.config['DEBUG'] = debug
     app.config['SECRET_KEY'] = 'gjr39dkjn344_!67#'
-    app.config['SQL_ALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/workspace/Flask-SocketIO-Chat-master/db.sqlite'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/workspace/Flask-SocketIO-Chat-master/db.sqlite'
+    
     import chat
     from .main import main as main_blueprint
     from .auth.controllers import auth as auth_blueprint

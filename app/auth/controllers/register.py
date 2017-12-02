@@ -1,18 +1,19 @@
 from . import auth
-from ..forms.register_form import RegisterForm
-from flask import render_template, request
+from ..forms.register_form import RegistrationForm
+from flask import render_template, request, flash, redirect
+from flask import url_for
 from ..models.user import User
 from app.db import db
 
 @auth.route('/register', methods=['GET'])
-def login_get():
-  form = RegisterForm(request.form)
-  return render_template('register.html', 
+def register_get():
+  form = RegistrationForm(request.form)
+  return render_template('auth/register.html', 
                           form=form)
   
-@auth.route('/login', methods=['POST'])
-def login_post():
-  form = RegisterForm(request.form)
+@auth.route('/register', methods=['POST'])
+def register_post():
+  form = RegistrationForm(request.form)
   if form.validate_on_submit():
     username = form.username.data
     email = form.email.data
@@ -21,3 +22,6 @@ def login_post():
     db.session.add(user)
     db.session.commit()
     flash('User Successfully Registered')
+    return redirect(url_for('auth.get_info'))
+  else:
+    return redirect(url_for('auth.register_get'))
