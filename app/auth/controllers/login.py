@@ -16,7 +16,9 @@ def login_get():
 def login_post():
   form = LoginForm(request.form)
   if form.validate_on_submit():
-    user = User.query.get(form.username.data)
+    user = User.query.filter_by(username = form.username.data).first()
+    print user
+    print form.username.data
     if user is not None and user.check_password_hash(form.password.data):
       login_user(user)
       
@@ -24,12 +26,14 @@ def login_post():
       
       next = request.args.get('next')
       # we should use safe redirects here
-      redirect(next or url_for('index'))
+      return redirect(next or url_for('main.index'))
     else:
       abort(403)
+  else:
+    return redirect(url_for('auth.login_get'))
       
 @login_manager.user_loader
 def load_user(user_id):
-  return User.get(user_id)
+  return User.query.get(user_id)
   
   

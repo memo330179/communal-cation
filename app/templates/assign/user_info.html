@@ -1,0 +1,30 @@
+{% extends "_layout.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block body %}
+<h1>Tell us a little about yourself.</h1>
+<form method=post class="col-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3 align-self-center">
+  <dl>
+    <div class="form-group">
+    <label for="slidecontainer">Where do you consider yourself in the political spectrum</label>
+    <div id="slidecontainer">
+      <input name="spectrum" type="range" min="1" max="100" value="50" class="slider form-control" id="myRange">
+    </div>
+    </div>
+    <div class="form-group">
+    <label for="user_story">Tell your partner a little about you</label>
+    <div id='user_story'>
+      <textarea name="about_me" class="form-control"></textarea>
+    </div>
+    </div>
+    
+    <div class="form-group">
+    <label for="goal">What are you hoping to get out of this experience?</label>
+    <div id='goal'>
+      <textarea name="hope" class="form-control"></textarea>
+    </div>
+    </div>
+  </dl>
+  <p><input type=submit value='Submit Info'>
+</form>
+
+{% endblock %}

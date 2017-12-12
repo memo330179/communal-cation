@@ -1,14 +1,19 @@
-<html>
-    <head>
-        <title>Welcome!</title>
-    </head>
-    <body>
-        <h1>Wilkommen</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            {{ form.name.label }}: {{ form.name() }} {% for error in form.name.errors %}{{ error }}{% endfor %}<br>
-            {{ form.room.label }}: {{ form.room() }} {% for error in form.room.errors %}{{ error }}{% endfor %}<br>
-            {{ form.submit() }}
-        </form>
-    </body>
-</html>
+{% extends "_layout.html" %}
+{% block body %}
+        <h1> Welcome {{current_user.username}}, You are making the world better</h1>
+        <h2>Rooms</h2>
+        <p>The rooms in which you can talk to other people will be here. Just click on one and get connected.</p>
+        {% if room_id is not none %}
+            <a href="{{ url_for('main.chat', room_id=room_id)}}">Go to your room!</a>
+        {% else %}
+            <p>You have not been paired with anyone yet. Please be patient!</p>
+        {% endif %}
+        <h2></h2>
+        {% for request in user_requests %}
+        <p>
+            You have been requested to join in a chat. View Their <a href="{{url_for('assign.profile', user_id=request.requester_id)}}">Profile</a>
+            <a href="{{url_for('assign.assign_partner', user_id=request.requester_id) }}">Accept</a>
+            </p>
+        {% endfor %} 
+            
+{% endblock %}

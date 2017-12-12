@@ -1,0 +1,14 @@
+{% extends "_layout.html" %}
+{% block body %}
+    <p>Hello! My name is {{user.username}}</p>
+    
+    <p>I consider myself in the {% if user.user_info[0].spectrum > 50 %} conservative {% else %} liberal {% endif %} Spectrum</p>
+    
+    <p>Here is a little more about me:</p>
+    
+    <p>{{user.user_info[0].user_story}}</p>
+    
+    <p>What I hope to get out:</p>
+    
+    <p>{{user.user_info[0].goal}}</p>
+{% endblock %}

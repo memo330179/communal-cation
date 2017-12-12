@@ -6,4 +6,4 @@ from flask import url_for, redirect
 @login_required
 def logout():
   logout_user()
-  return redirect(url_for('login'))
+  return redirect(url_for('auth.login_get'))

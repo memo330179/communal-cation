@@ -22,6 +22,6 @@ def register_post():
     db.session.add(user)
     db.session.commit()
     flash('User Successfully Registered')
-    return redirect(url_for('auth.get_info'))
+    return redirect(url_for('assign.info_get'))
   else:
     return redirect(url_for('auth.register_get'))

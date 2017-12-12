@@ -9,6 +9,8 @@ class User(db.Model):
   pw_hash = db.Column('password', db.String())
   email = db.Column('email', db.String())
   has_info = db.Column('has_info', db.Boolean())
+  room_id = db.Column(db.Integer, db.ForeignKey('rooms.id'))
+  
   
   def __init__(self, username, password, email):
     self.username = username

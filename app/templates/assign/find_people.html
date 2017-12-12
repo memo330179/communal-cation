@@ -1,0 +1,12 @@
+{% extends "_layout.html" %}
+{% block body %}
+{% for user in users %}
+<div style="border-style:dotted;">
+  <p>Meet {{ user.user.username }}!</p>
+   <p> View <a href='{{url_for("assign.profile", user_id=user.id)}}'>profile.</a> </p>
+    <p>Send <a href='{{url_for("assign.request_partner", user_id = user.id)}}'>Request</a></p>
+    <p>They consider themselves on the {% if user.spectrum > 50 %} conservative {% else %} liberal {% endif %} Spectrum 
+  </p>
+  </div>
+{% endfor %}
+{% endblock %}
